@@ -30,8 +30,7 @@ def sendReq(nam, path, meth = 'GET', body = '', isCorrect = lambda c: c == 200):
 	assert isCorrect(rsp.status), '''Server has returned an error
 URL: %s
 Status: %d
-Body: %s
-''' % (url, rsp.status, ret)
+Body: %s''' % (url, rsp.status, ret)
 	return json.loads(ret)
 
 # send a DELETE request
