@@ -18,7 +18,7 @@ def mkConn(url):
 '''
 send request to a system and return a body of response
 '''
-def sendReq(nam, path, isCorrect = lambda c: c < 400, meth = 'GET', body = ''):
+def sendReq(nam, path, meth = 'GET', body = '', isCorrect = lambda c: c == 200):
 	url = config.getURL(nam)
 	cn = mkConn(url)
 	cn.request(meth, '%s/api/v3/%s' % (url, path), body, {
@@ -34,8 +34,11 @@ Body: %s
 ''' % (url, rsp.status, ret)
 	return json.loads(ret)
 
+# send a DELETE request
+delete = lambda nam, path: sendReq(nam, path, 'DELETE')
+
 # send a GET request
-get = lambda nam, path: sendReq(nam, path, lambda c: c == 200)
+get = lambda nam, path: sendReq(nam, path)
 
 # send a POST request
-post = lambda nam, path, hsh: sendReq(nam, path, lambda c: c == 201, 'POST', json.dumps(hsh))
+post = lambda nam, path, hsh: sendReq(nam, path, 'POST', json.dumps(hsh), lambda c: c == 201)
