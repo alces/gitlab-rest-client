@@ -12,7 +12,7 @@ class Crud():
 	'''
 	get an object by system's name and id
 	'''
-	def byId(self, sysNam, id):
+	def by_id(self, sysNam, id):
 		return http.get(sysNam, '%s/%d' % (self.path, id))
 
 	'''
@@ -30,7 +30,7 @@ class Crud():
 	'''
 	create a cache of objects
 	'''
-	def mkCache(self, sysNam, keyField = 'name'):
+	def mk_cache(self, sysNam, keyField = 'name'):
 		if sysNam not in self.cache or not self.cache[sysNam]:
 			self.cache[sysNam] = dict(map(lambda e: (e[keyField], e), http.get(sysNam, self.path)))
 		return self.cache[sysNam]
@@ -38,11 +38,11 @@ class Crud():
 	'''
 	clear cache for a given system
 	'''
-	def clrCache(self, sysNam):
+	def clr_cache(self, sysNam):
 		self.cache[sysNam] = {}
 
 	'''
 	get an object by system's name and an object's name
 	'''
-	def byName(self, sysNam, objNam):
-		return self.mkCache(sysNam)[objNam]
+	def by_name(self, sysNam, objNam):
+		return self.mk_cache(sysNam)[objNam]

@@ -4,7 +4,7 @@ working with gitlab's groups
 
 from crud import Crud
 
-class groups(Crud):
+class Groups(Crud):
 	def __init__(self):
 		Crud.__init__(self, 'groups')
 

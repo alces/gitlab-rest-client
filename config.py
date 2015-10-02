@@ -15,12 +15,12 @@ syscfg = json.load(open(cfgpath))
 '''
 get configuration for a named system
 '''
-def getSys(nam):
+def get_sys(nam):
 	assert nam in syscfg, "System %s doesn't exist in %s" % (nam, cfgpath)
 	return syscfg[nam]
 
 # get a system's URL
-getURL = lambda x: getSys(x)['url']
+get_url = lambda x: get_sys(x)['url']
 
 # get a system's token
-getToken = lambda x: getSys(x)['token']
+get_token = lambda x: get_sys(x)['token']
