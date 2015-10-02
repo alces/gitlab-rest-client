@@ -19,3 +19,10 @@ class Crud():
 	'''
 	def add(self, sysNam, data):
 		return http.post(sysNam, self.path, data)
+
+	'''
+	delete an instcnce by id
+	'''
+	def delete(self, sysNam, id):
+		return http.delete(sysNam, '%s/%d' % (self.path, id))
+
