@@ -42,3 +42,6 @@ get = lambda nam, path: send_req(nam, path)
 
 # send a POST request
 post = lambda nam, path, hsh: send_req(nam, path, 'POST', json.dumps(hsh), lambda c: c == 201)
+
+# send a PUT request
+put = lambda nam, path, hsh: send_req(nam, path, 'PUT', json.dumps(hsh))
