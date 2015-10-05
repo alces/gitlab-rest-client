@@ -21,7 +21,8 @@ send request to a system and return a body of response
 def send_req(nam, path, meth = 'GET', body = '', isCorrect = lambda c: c == 200):
 	url = config.get_url(nam)
 	cn = mk_conn(url)
-	cn.request(meth, '%s/api/v3/%s' % (url, path), body, {
+	fullUrl = '%s/api/v3/%s' % (url, path)
+	cn.request(meth, fullUrl, body, {
 		'PRIVATE-TOKEN': config.get_token(nam),
 		'Content-Type': 'application/json'
 	})
@@ -30,7 +31,7 @@ def send_req(nam, path, meth = 'GET', body = '', isCorrect = lambda c: c == 200)
 	assert isCorrect(rsp.status), '''Server has returned an error
 URL: %s
 Status: %d
-Body: %s''' % (url, rsp.status, ret)
+Body: %s''' % (fullUrl, rsp.status, ret)
 	return json.loads(ret)
 
 # send a DELETE request
