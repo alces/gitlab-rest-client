@@ -3,8 +3,9 @@ working with gitlab's groups
 '''
 
 from crud import Crud
+import members
 
-class Groups(Crud):
+class Groups(Crud, members.Members):
 	def __init__(self):
 		Crud.__init__(self, 'groups')
 

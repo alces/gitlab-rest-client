@@ -3,8 +3,9 @@ working with gitlab's projects
 '''
 
 from crud import Crud
+import members
 
-class Projects (Crud):
+class Projects (Crud, members.Members):
 	def __init__(self):
 		Crud.__init__(self, 'projects', lambda x: x['path_with_namespace'])
 
