@@ -5,10 +5,10 @@ generic CRUD oparations for the gitlab's objects
 import http
 
 class Crud():
-	def __init__(self, path, keyField = 'name'):
+	def __init__(self, path, keyFunc = lambda x: x['name']):
 		self.path = path
 		self.cache = {}
-		self.key_field = keyField
+		self.key_func = keyFunc
 
 	'''
 	get an object by system's name and id
@@ -33,7 +33,7 @@ class Crud():
 	'''
 	def mk_cache(self, sysNam):
 		if sysNam not in self.cache or not self.cache[sysNam]:
-			self.cache[sysNam] = dict(map(lambda e: (e[self.key_field], e), http.get(sysNam, self.path)))
+			self.cache[sysNam] = dict(map(lambda e: (self.key_func(e), e), http.get(sysNam, self.path)))
 		return self.cache[sysNam]
 	
 	'''
