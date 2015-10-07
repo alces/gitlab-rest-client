@@ -47,3 +47,6 @@ class Crud():
 	'''
 	def by_name(self, sysNam, objNam):
 		return self.mk_cache(sysNam)[objNam]
+
+	# get a full list of objects (simply an alias)
+	get = mk_cache
