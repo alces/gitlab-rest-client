@@ -34,8 +34,8 @@ def get_user(sysNam, usrDict):
 		usr = _usrs.by_name(sysNam, usrDict['username'])
 	except KeyError:
 		# add the 1st identity to a top level of the users' dict
-		# ('cause POST API call to /users works with only one extern_uuid)
-		dictWithUuid = filter_dict(dict(usrDict.items() + (usrDict['identities'] and usrDict['identities'][0].items() or [])),
+		# ('cause POST API call to /users works with only one extern_uid)
+		dictWithUid = filter_dict(dict(usrDict.items() + (usrDict['identities'] and usrDict['identities'][0].items() or [])),
 			'admin',
 			'bio',
 			'can_create_group',
@@ -47,7 +47,7 @@ def get_user(sysNam, usrDict):
 			'skype',
 			'twitter',
 			'website_url')
-		usr = _usrs.add(sysNam, usrDict['username'], usrDict['name'], usrDict['email'], confirm = False, **dictWithUuid)
+		usr = _usrs.add(sysNam, usrDict['username'], usrDict['name'], usrDict['email'], confirm = False, **dictWithUid)
 		# rebuild the cache after adding a new user
 		_usrs.clr_cache(sysNam)
 	return usr['id']
