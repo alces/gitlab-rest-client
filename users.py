@@ -22,7 +22,7 @@ class Users (Crud):
 			+ ('password' in opts and [] or [('password', self.rand_pass())])
 			+ opts.items()))
 
-# for saving users' cache between the calls of get_user()
+# for reusing users' cache between the calls of get_user()
 _usrs = Users()
 
 '''
@@ -33,7 +33,8 @@ def get_user(sysNam, usrDict):
 	try:
 		usr = _usrs.by_name(sysNam, usrDict['username'])
 	except KeyError:
-		# add the 1st identity to a users' dict
+		# add the 1st identity to a top level of the users' dict
+		# ('cause POST API call to /users works with only one extern_uuid)
 		dictWithUuid = filter_dict(dict(usrDict.items() + (usrDict['identities'] and usrDict['identities'][0].items() or [])),
 			'admin',
 			'bio',
@@ -47,7 +48,7 @@ def get_user(sysNam, usrDict):
 			'twitter',
 			'website_url')
 		usr = _usrs.add(sysNam, usrDict['username'], usrDict['name'], usrDict['email'], confirm = False, **dictWithUuid)
-		# rebuilding of cache after adding a new user is needed
+		# rebuild the cache after adding a new user
 		_usrs.clr_cache(sysNam)
 	return usr['id']
 
