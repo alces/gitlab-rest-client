@@ -28,6 +28,12 @@ class Projects (Crud, members.Members):
 	def put_branch(self, sysNam, prjId, brNam, cmd):
 		return http.put(sysNam, '%s/%d/repository/branches/%s/%s' % (self.path, prjId, brNam, cmd),
 			{'id': prjId, 'branch': brNam})
+
+	'''
+	get a list of projects by namespace id
+	'''
+	def by_namespace(self, sysNam, nsId):
+		return filter(lambda p: p['namespace']['id'] == nsId, self.get(sysNam))
 	
 	# shortcut for protect a branch
 	protect = lambda self, sn, pr, br: self.put_branch(sn, pr, br, 'protect')
