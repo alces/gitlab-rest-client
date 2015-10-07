@@ -48,5 +48,5 @@ class Crud():
 	def by_name(self, sysNam, objNam):
 		return self.mk_cache(sysNam)[objNam]
 
-	# get a full list of objects (simply an alias)
-	get = mk_cache
+	# get a full list of objects
+	get = lambda self, sn: self.mk_cache(sn).values()
