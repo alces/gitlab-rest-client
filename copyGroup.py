@@ -55,13 +55,13 @@ dstGid = grp.add(dstSys, grpNam)['id']
 # add members to the group
 add_members(grp, srcGid, dstGid)
 
-# copy projects from the source group to the destination one
+# copy projects with their members from the source group to the destination one
 prj = Projects()
 for p in prj.by_namespace(srcSys, srcGid):
-	prj.add(dstSys, p['name'], namespace_id = dstGid, **filter_dict(p, 
+	add_members(prj, p['id'], prj.add(dstSys, p['name'], namespace_id = dstGid, **filter_dict(p, 
 		'description',
 		'issues_enabled',
 		'merge_requests_enabled',
 		'wiki_enabled',
 		'snippets_enabled',
-		'visibility_level'))
+		'visibility_level'))['id'])
