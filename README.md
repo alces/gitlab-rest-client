@@ -8,18 +8,19 @@ It supports working with the following kinds of gitlab objects:
 * projects
 * users
 
-[copyGroup.py](copyGroup.py) is a sample script using this library to copy a group with all the including members and repositories from one gitlab server to another.
+[copyGroup.py](copyGroup.py) is a sample script using this library to copy a group with all the included members and repositories from one gitlab server to another.
 
 ## Configuration files
 
 URLs and private tokens for all the gitlab servers you're working with (a.k.a. 'systems') should be placed in the `~/.gitlab_systems.json`
-(this file must be readable and writable only by its owner). Example of its content could be found [here](dot.gitlab_systems.sample.json).
+(this file must be readable and writable only by its owner). Example of its content could be found in [dot.gitlab_systems.sample.json](dot.gitlab_systems.sample.json).
 Gitlab users whose tokens are saved in this file have to have permissions to do all the things you're planning to do by this client 
 on the particulary server.
 
 ## Documentation
 
-Gitlab's REST API is pretty well documented [here](https://github.com/gitlabhq/gitlabhq/tree/master/doc/api).
+Gitlab's REST API is pretty well documented here:
+[https://github.com/gitlabhq/gitlabhq/tree/master/doc/api](https://github.com/gitlabhq/gitlabhq/tree/master/doc/api).
 
 ## Bugs and gotchas
 
